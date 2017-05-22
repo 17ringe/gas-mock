@@ -26,4 +26,9 @@ function gas_mock() {
   return customMock;
 }
 
-module.exports = {gas_mock};
+module.exports = {
+  gas_mock,
+  require: function(folderPath, globalObject, options) {
+    return gas.require(folderPath, globalObject, options);
+  }
+};
