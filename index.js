@@ -9,8 +9,10 @@ var service = require('./class/PropertiesService');
 
 function gas_mock() {
 
+  var defMock = gas.globalMockDefault;
+  
   var customMock = {
-    Logger: logger.get_mock(),
+    Logger: logger.get_mock(defMock.Logger),
     Properties: properties.get_mock(),
     HTTPResponse: response.get_mock(),
     __proto__: gas.globalMockDefault
@@ -27,7 +29,7 @@ function gas_mock() {
 }
 
 module.exports = {
-  gas_mock,
+  globalMockDefault: gas_mock(),
   require: function(folderPath, globalObject, options) {
     return gas.require(folderPath, globalObject, options);
   }

@@ -1,11 +1,6 @@
 // Logger クラスのモックを作成
-function get_mock() {
-  return {
-    // log 関数の実装
-    log: function(text) {
-      console.log(text);
-    }
-  };
+function get_mock(logger) {
+  return logger;
 }
 
 module.exports = {get_mock};
