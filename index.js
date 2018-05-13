@@ -31,6 +31,12 @@ function gas_mock() {
 module.exports = {
   globalMockDefault: gas_mock(),
   require: function(folderPath, globalObject, options) {
+    if(options == null) options = {
+      filter: function(f) {
+        if(path.basename(f).match(/^\._/) != null) return false;
+        return path.extname(f) == '.js';
+      }
+    }
     return gas.require(folderPath, globalObject, options);
   }
 };
