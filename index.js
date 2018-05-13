@@ -1,5 +1,6 @@
 var gas = require('gas-local');
 var Sugar = require('sugar');
+var path = require('path');
 
 var urlfetchapp = require('./class/UrlFetchApp');
 var response = require('./class/HTTPResponse');
