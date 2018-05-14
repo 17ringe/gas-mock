@@ -1,4 +1,4 @@
-var assert = require('assert');
+var assert = require('chai').assert;
 var gas = require('gas-local');
 var Sugar = require('sugar');
 
@@ -18,7 +18,7 @@ describe('urlfetchapp.js', function() {
   });
 
   it('登録した関数が存在すること', function() {
-    assert.equal(glib.UrlFetchApp.hasOwnProperty('fetch'), true);
+    assert.property(glib.UrlFetchApp, 'fetch');
   });
 
   it('myUrlFetchApp for yahoo', function() {
