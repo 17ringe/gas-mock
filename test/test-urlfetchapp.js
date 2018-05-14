@@ -12,6 +12,8 @@ mymock.Logger.enabled = false;
 var glib = gas.require('./src', mymock);
 
 describe('urlfetchapp.js', function() {
+  // mocha がタイムアウトするまでの時間を延長
+  this.timeout(4000);
 
   before(function() {
     glib = mock.require('./src', mymock);
@@ -21,15 +23,22 @@ describe('urlfetchapp.js', function() {
     assert.property(glib.UrlFetchApp, 'fetch');
   });
 
-  it('myUrlFetchApp for yahoo', function() {
-    assert.equal(glib.myUrlFetchApp(), 'Yahoo! JAPAN');
+  it('デフォルト文字コードがUTF8であること', function() {
+    assert.match(glib.myUrlFetchApp(), /日本語 utf8/);
   });
 
-  it('myUrlFetchApp for livedoor', function() {
-    assert.equal(glib.myUrlFetchApp('http://www.livedoor.com/'), 'livedoor');
+  it('UTF8を指定して正しく動作すること', function() {
+    var url = 'https://www.google.com/search?q=%E6%97%A5%E6%9C%AC%E8%AA%9E%20utf8&oe=utf8'
+    assert.match(glib.myUrlFetchApp(url, 'utf8'), /日本語 utf8/);
   });
 
-  it('myUrlFetchApp for Shift_JIS', function() {
-    assert.equal(glib.myUrlFetchApp('http://abehiroshi.la.coocan.jp/top.htm', 'sjis'), '阿部 寛のホームページ');
+  it('SJISを指定して正しく動作すること', function() {
+    var url = 'https://www.google.com/search?q=%E6%97%A5%E6%9C%AC%E8%AA%9E%20sjis&oe=sjis'
+    assert.match(glib.myUrlFetchApp(url, 'sjis'), /日本語 sjis/);
+  });
+
+  it('EUCJPを指定して正しく動作すること', function() {
+    var url = 'https://www.google.com/search?q=%E6%97%A5%E6%9C%AC%E8%AA%9E%20eucjp&oe=eucjp'
+    assert.match(glib.myUrlFetchApp(url, 'eucjp'), /日本語 eucjp/);
   });
 });
