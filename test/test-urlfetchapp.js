@@ -13,14 +13,18 @@ var glib = gas.require('./src', mymock);
 
 describe('urlfetchapp.js', function() {
   // mocha がタイムアウトするまでの時間を延長
-  this.timeout(4000);
+  this.timeout(5000);
 
   before(function() {
     glib = mock.require('./src', mymock);
   });
 
-  it('登録した関数が存在すること', function() {
+  it('fetch 関数が存在すること', function() {
     assert.property(glib.UrlFetchApp, 'fetch');
+  });
+
+  it('ローカル変数に外部からアクセスできないこと', function() {
+    assert.isUndefined(glib.UrlFetchApp.response_);
   });
 
   it('デフォルト文字コードがUTF8であること', function() {

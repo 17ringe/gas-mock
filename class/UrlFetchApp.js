@@ -1,16 +1,16 @@
 var request = require('sync-request');
 
 // UrlFetchApp クラスのモックを作成
-function get_mock(param) {
-  return {
-    enabled: true,
-    response: param,
+var UrlFetchApp = function(response) {
+  enabled_ = true;
+  response_ = response;
 
+  return {
     // fetch 関数の実装
     fetch: function(url, params) {
-      if(this.enabled == false) {
-        this.response.setContentText(new Buffer(''));
-        return this.response;
+      if(enabled_ == false) {
+        response_.setContentText(new Buffer(''));
+        return response_;
       }
       var method = 'GET';
       if(params == null) params = {};
@@ -25,10 +25,14 @@ function get_mock(param) {
       } else {
         req = request(method, url);
       }
-      this.response.setContentText(req.body);
-      return this.response;
+      response_.setContentText(req.body);
+      return response_;
     }
   }
+}
+
+function get_mock(response) {
+  return new UrlFetchApp(response);
 }
 
 module.exports = {get_mock};

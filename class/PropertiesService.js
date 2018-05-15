@@ -1,20 +1,27 @@
 // PropertiesService クラスのモックを作成
-function get_mock(param) {
-  var properties = param;
+var PropertiesService = function(properties) {
+  var properties_ = properties;
+
   return {
     // getDocumentProperties 関数の実装
     getDocumentProperties: function() {
-      return properties;
+      return properties_;
     },
+
     // getScriptProperties 関数の実装
     getScriptProperties: function() {
-      return properties;
+      return properties_;
     },
+
     // getUserProperties 関数の実装
     getUserProperties: function() {
-      return properties;
+      return properties_;
     }
-  };
+  }
+};
+
+function get_mock(properties) {
+  return new PropertiesService(properties);
 }
 
 module.exports = {get_mock};

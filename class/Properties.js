@@ -1,39 +1,43 @@
 var Sugar = require('sugar');
 
 // Properties クラスのモックを作成
-function get_mock() {
-  return {
-    properties: {},
+var Properties = function() {
+  var properties_ = {};
 
+  return {
     // getProperty 関数の実装
     getProperty: function(key) {
-      var val = this.properties[key];
+      var val = properties_[key];
       return val != null ? val : null;
     },
 
     // setProperty 関数の実装
     setProperty: function(key, value) {
-      Sugar.Object.set(this.properties, key, value);
-      return this.properties;
+      Sugar.Object.set(properties_, key, value);
+      return properties_;
     },
 
     // getProperties 関数の実装
     getProperties: function() {
-      return this.properties;
+      return properties_;
     },
 
     // setProperties 関数の実装
     setProperties: function(properties, deleteAllOthers) {
-      if(deleteAllOthers == true) this.deleteAllProperties();
-      Sugar.Object.merge(this.properties, properties);
-      return this.properties;
+      if(deleteAllOthers == true) deleteAllProperties();
+      Sugar.Object.merge(properties_, properties);
+      return properties_;
     },
 
     // deleteAllProperties 関数の実装
     deleteAllProperties: function() {
-      this.properties = {};
+      properties_ = {};
     }
-  };
+  }
+}
+
+function get_mock() {
+  return new Properties();
 }
 
 module.exports = {get_mock};
