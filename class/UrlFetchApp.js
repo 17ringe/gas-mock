@@ -9,7 +9,7 @@ function get_mock(param) {
     // fetch 関数の実装
     fetch: function(url, params) {
       if(this.enabled == false) {
-        this.response.content = new Buffer('');
+        this.response.setContentText(new Buffer(''));
         return this.response;
       }
       var method = 'GET';
@@ -25,7 +25,7 @@ function get_mock(param) {
       } else {
         req = request(method, url);
       }
-      this.response.content = req.body;
+      this.response.setContentText(req.body);
       return this.response;
     }
   }
