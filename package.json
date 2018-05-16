@@ -2,10 +2,10 @@
   "name": "gas-mock",
   "description": "mock for Google Apps Script",
   "version": "0.0.1",
-  "homepage": "https://github.com/ina6ra/gas-mock",
+  "homepage": "https://github.com/17ringe/gas-mock",
   "author": {
     "name": "Kazuhiro Inari",
-    "url": "http://qiita.com/in6ra"
+    "url": "http://qiita.com/17ringe"
   },
   "main": "index.js",
   "licenses": [
@@ -13,9 +13,16 @@
       "type": "MIT"
     }
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/17ringe/gas-mock.git"
+  },
+  "engines": {
+    "node": ">= 8"
+  },
   "dependencies": {
     "date-format": "^0.0.2",
-    "gas-local": "^1.2.0",
+    "gas-local": "^1.3.0",
     "iconv-lite": "^0.4.15",
     "sugar": "^2.0.4",
     "sync-request": "^4.0.1"
@@ -25,7 +32,7 @@
     "gulp": "^3.9.1",
     "gulp-exec": "^2.1.3",
     "gulp-load-plugins": "^1.5.0",
-    "gulp-mocha": "^4.3.1",
+    "gulp-mocha": "3.0.1",
     "mocha": "^3.2.0"
   },
   "scripts": {
