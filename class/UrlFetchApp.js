@@ -2,16 +2,11 @@ var request = require('sync-request');
 
 // UrlFetchApp クラスのモックを作成
 var UrlFetchApp = function(response) {
-  enabled_ = true;
   response_ = response;
 
   return {
     // fetch 関数の実装
     fetch: function(url, params) {
-      if(enabled_ == false) {
-        response_.setContentText(new Buffer(''));
-        return response_;
-      }
       var method = 'GET';
       if(params == null) params = {};
       if(params['method'] != null) {
