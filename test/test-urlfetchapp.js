@@ -1,30 +1,19 @@
 var assert = require('chai').assert;
 var gas = require('gas-local');
-var Sugar = require('sugar');
 
 var mock = require('../index.js');
+var glib = gas.require('./src', mock.globalMockDefault);
 
-var mymock = mock.globalMockDefault;
-
-mymock.Logger.enabled = false;
-
-// ソースフォルダの指定はプロジェクトルートからの相対パス
-var glib = gas.require('./src', mymock);
-
-describe('urlfetchapp.js', function() {
+describe('UrlFetchApp.js', function() {
   // mocha がタイムアウトするまでの時間を延長
-  this.timeout(5000);
+  this.timeout(10000);
 
-  before(function() {
-    glib = mock.require('./src', mymock);
+  it('ローカル変数に外部からアクセスできないこと', function() {
+    assert.isUndefined(glib.UrlFetchApp.response_);
   });
 
   it('fetch 関数が存在すること', function() {
     assert.property(glib.UrlFetchApp, 'fetch');
-  });
-
-  it('ローカル変数に外部からアクセスできないこと', function() {
-    assert.isUndefined(glib.UrlFetchApp.response_);
   });
 
   it('デフォルト文字コードがUTF8であること', function() {
