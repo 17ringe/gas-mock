@@ -1,6 +1,6 @@
 # gas-mock
 
-This project is Mock library for Google Apps Script.
+This project is Mock library for Google Apps Script.  
 Run and test locally without changing the source code of gas.
 
 ## Initialize

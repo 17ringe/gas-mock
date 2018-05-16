@@ -4,5 +4,8 @@
         "editor.insertSpaces": true,
         "editor.tabSize": 2,
         "editor.autoIndent": false
+    },
+    "[markdown]": {
+        "files.trimTrailingWhitespace": false
     }
 }
