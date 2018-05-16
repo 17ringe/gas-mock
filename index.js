@@ -11,12 +11,12 @@ var service = require('./class/PropertiesService');
 function gas_mock() {
 
   var defMock = gas.globalMockDefault;
-  
+
   var customMock = {
     Logger: logger.get_mock(defMock.Logger),
     Properties: properties.get_mock(),
     HTTPResponse: response.get_mock(),
-    __proto__: gas.globalMockDefault
+    __proto__: defMock
   };
 
   var addMock = {
@@ -24,14 +24,13 @@ function gas_mock() {
     UrlFetchApp: urlfetchapp.get_mock(customMock['HTTPResponse'])
   };
 
-  Sugar.Object.merge(customMock, addMock);
-
-  return customMock;
+  return Sugar.Object.merge(customMock, addMock);
 }
 
 module.exports = {
   globalMockDefault: gas_mock(),
   require: function(folderPath, globalObject, options) {
+    if(globalObject == null) globalObject = this.globalMockDefault;
     if(options == null) options = {
       filter: function(f) {
         if(path.basename(f).match(/^\._/) != null) return false;
