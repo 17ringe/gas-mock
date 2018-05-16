@@ -1,4 +1,5 @@
 node_modules/
+.gas/
 .yarnclean
 yarn.lock
 gapps.config.json
