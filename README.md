@@ -3,11 +3,10 @@
 This project is Mock library for Google Apps Script.  
 Run and test locally without changing the source code of gas.
 
-## Initialize
+## Requirements
 
-```
-$ npm install -g yarn
-```
+- node >= 8
+- `` npm install -g yarn node-google-apps-script``
 
 ## Create Sample
 
